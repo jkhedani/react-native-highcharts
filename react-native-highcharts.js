@@ -36,6 +36,7 @@ class ChartWeb extends Component {
                                       : '<script src="https://code.highcharts.com/highcharts.js"></script>'}
                         ${this.props.more ? '<script src="https://code.highcharts.com/highcharts-more.js"></script>'
                                       : ''}
+                        <script src="https://code.highcharts.com/modules/heatmap.js"></script>
                         <script src="https://code.highcharts.com/modules/exporting.js"></script>
                         <script>
                         $(function () {
@@ -81,9 +82,9 @@ class ChartWeb extends Component {
                   source={{ html: concatHTML, baseUrl: 'web/' }}
                   javaScriptEnabled={true}
                   domStorageEnabled={true}
-                  scalesPageToFit={true}
                   scrollEnabled={false}
-                  automaticallyAdjustContentInsets={true}
+                  // scalesPageToFit={true} // Enable if you want to auto-scaling (see WebView documentation)
+                  // automaticallyAdjustContentInsets={true} // Enable if you want to automatically adjust insets (see WebView documentation)
               />
           </View>
         );
