@@ -1,110 +1,22 @@
 # React-Native Highcharts
 
-This is a react-native component for IOS and Android that uses [Highcharts](http://www.highcharts.com) where you send the configuration as a prop and the chart is rendered within a WebView 
+This repository is forked from [react-native-highcharts](https://github.com/TradingPal/react-native-highcharts) in order to add custom modules and have better control of WebView component output. For the most part it is exactly the same as the mentioned package.
 
 ## Getting Started
-```bat
-npm install react-native-highcharts --save
-```
-## Demo
-![](http://i.giphy.com/l3vRdWwXin1ooLCHS.gif)
 
-## Basic example
-**REMEMBER**  to declare the variable Highcharts='Highcharts'
+    npm install react-native-sy-highcharts
 
-```javascript
-import ChartView from 'react-native-highcharts';
-...
-render() {
-    var Highcharts='Highcharts';
-    var conf={
-            chart: {
-                type: 'spline',
-                animation: Highcharts.svg, // don't animate in old IE
-                marginRight: 10,
-                events: {
-                    load: function () {
 
-                        // set up the updating of the chart each second
-                        var series = this.series[0];
-                        setInterval(function () {
-                            var x = (new Date()).getTime(), // current time
-                                y = Math.random();
-                            series.addPoint([x, y], true, true);
-                        }, 1000);
-                    }
-                }
-            },
-            title: {
-                text: 'Live random data'
-            },
-            xAxis: {
-                type: 'datetime',
-                tickPixelInterval: 150
-            },
-            yAxis: {
-                title: {
-                    text: 'Value'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                        Highcharts.numberFormat(this.y, 2);
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            exporting: {
-                enabled: false
-            },
-            series: [{
-                name: 'Random data',
-                data: (function () {
-                    // generate an array of random data
-                    var data = [],
-                        time = (new Date()).getTime(),
-                        i;
+## Updating this package
 
-                    for (i = -19; i <= 0; i += 1) {
-                        data.push({
-                            x: time + i * 1000,
-                            y: Math.random()
-                        });
-                    }
-                    return data;
-                }())
-            }]
-        };
-    return (
-      <ChartView style={{height:300}} config={conf}></ChartView>
-    );
-}
-```
+1. Merge upstream repo into master after committing and testing changes. View this [article](https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/) to see how.
 
-## Props
-| Prop          | Required      | Description  |
-| ------------- |:-------------:| ------------:|
-| config        | true          | Highcharts configuration [See the docs.>>](http://www.highcharts.com/docs/getting-started/your-first-chart)  |
-| stock     | false      |   Default false; use Highstock |
-| more     | false      |   Default false; use Highstock-more |
-| style | false      |   Style object to be passed onto the WebView |
+2. Login with the `smartyields` NPM user (see admin for password).
 
-## NOTE
-if not rendering in real device add this two props to the component
-```javascript
-javaScriptEnabled={true}
-domStorageEnabled={true}
-```
+3. Increment package version:
 
-## Stuff used to make this:
+    npm version <update_type>
 
- * [Highcharts](http://www.highcharts.com/) for making the chart
- 
+4. Re-publish package:
+
+    npm publish
